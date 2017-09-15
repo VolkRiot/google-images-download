@@ -1,32 +1,16 @@
-
-# coding: utf-8
-
-# In[ ]:
-
-#Searching and Downloading Google Images/Image Links
-
-#Import Libraries
-
-#coding: UTF-8
-
-import time       #Importing the time library to check the time of code execution
-import sys    #Importing the System Library
+import time
+import sys
 import os
 import urllib2
 
+# This list is used to search keywords. You can edit this list to search for google images of your choice. You can simply add and remove elements of the list.
+search_keyword = ['Yosemite', 'Grand Canyon']
 
-########### Edit From Here ###########
+# This list is used to further add suffix to your search term. Each element of the list will help you download 100 images. First element is blank which denotes that no suffix is added to the search keyword of the above list. You can edit the list by adding/deleting elements from it.So if the first element of the search_keyword is 'Australia' and the second element of keywords is 'high resolution', then it will search for 'Australia High Resolution'
+keywords = ['']
 
-#This list is used to search keywords. You can edit this list to search for google images of your choice. You can simply add and remove elements of the list.
-search_keyword = ['Australia']
-
-#This list is used to further add suffix to your search term. Each element of the list will help you download 100 images. First element is blank which denotes that no suffix is added to the search keyword of the above list. You can edit the list by adding/deleting elements from it.So if the first element of the search_keyword is 'Australia' and the second element of keywords is 'high resolution', then it will search for 'Australia High Resolution'
-keywords = [' high resolution']
-
-########### End of Editing ###########
-
-
-
+# Set total number of images to donwload per item here
+total_images = 10
 
 #Downloading entire Web Document (Raw Page Content)
 def download_page(url):
@@ -74,7 +58,7 @@ def _images_get_next_item(s):
 #Getting all links with the help of '_images_get_next_image'
 def _images_get_all_items(page):
     items = []
-    while True:
+    while len(items) < total_images:
         item, end_content = _images_get_next_item(page)
         if item == "no_links":
             break
@@ -97,16 +81,16 @@ while i<len(search_keyword):
     print ("Evaluating...")
     search_keywords = search_keyword[i]
     search = search_keywords.replace(' ','%20')
-    
+
      #make a search keyword  directory
     try:
         os.makedirs(search_keywords)
     except OSError, e:
         if e.errno != 17:
-            raise   
+            raise
         # time.sleep might help here
         pass
-    
+
     j = 0
     while j<len(keywords):
         pure_keyword = keywords[j].replace(' ','%20')
@@ -143,7 +127,7 @@ while i<len(search_keyword):
             req = Request(items[k], headers={"User-Agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"})
             response = urlopen(req,None,15)
             output_file = open(search_keywords+"/"+str(k+1)+".jpg",'wb')
-            
+
             data = response.read()
             output_file.write(data)
             response.close();
@@ -179,6 +163,3 @@ print("\n"+str(errorCount)+" ----> total Errors")
 
 
 # In[ ]:
-
-
-

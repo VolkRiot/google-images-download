@@ -2,10 +2,10 @@
 Python Script for 'searching' and 'downloading' hundreds of Google images/image links!
 
 ## Summary
-This is a Python program to search keywords/key-phrases on Google Images and then also optionally download all Images. 
+This is a Python program to search keywords/key-phrases on Google Images and then also optionally download all Images.
 
 ## Compatability
-This program is now compatible with both the versions of python (2.x and 3.x). It is a download-and-run program with couple of changes like the ketwords for which you want to search and download images.
+This program is now compatible with both the versions of python (2.x and 3.x). It is a download-and-run program with couple of changes like the keywords for which you want to search and download images.
 
 ## Status
 This is a small program which is ready-to-run, but still under development. Many more features will be added to it shortly.
